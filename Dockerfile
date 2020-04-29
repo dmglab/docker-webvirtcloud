@@ -35,21 +35,12 @@ RUN curl -L https://github.com/retspen/webvirtcloud/tarball/master | tar xzC /op
    ;mv -f /etc/nginx/nginx.conf.2 /etc/nginx/nginx.conf \
    ;exit 0
 
-RUN echo "">> /etc/supervisord.d/webvirtcloud.ini \
-   ;echo "">> /etc/supervisord.d/webvirtcloud.ini \
-   ;echo "[program:nginx]">> /etc/supervisord.d/webvirtcloud.ini \
-   ;echo "command=/usr/sbin/nginx -g 'daemon off;'">> /etc/supervisord.d/webvirtcloud.ini \
-   ;echo "autostart=true">> /etc/supervisord.d/webvirtcloud.ini \
-   ;echo "autorestart=true">> /etc/supervisord.d/webvirtcloud.ini \
-   ;echo "startretries=5">> /etc/supervisord.d/webvirtcloud.ini \
-   ;echo "numprocs=1">> /etc/supervisord.d/webvirtcloud.ini \
-   ;echo "startsecs=0">> /etc/supervisord.d/webvirtcloud.ini \
-   ;echo "process_name=%(program_name)s_%(process_num)02d">> /etc/supervisord.d/webvirtcloud.ini
-
 RUN echo "*" >> /root/.ssh/config \
    ;echo "  StrictHostKeyChecking no" >> /root/.ssh/config
 
 ADD entrypoint.sh /opt/entrypoint.sh
+ADD conf/supervisord.ini /etc/supervisord.d/webvirtcloud.ini
+
 WORKDIR /opt
 ENTRYPOINT ["/usr/bin/bash", "/opt/entrypoint.sh"]
 EXPOSE 80
