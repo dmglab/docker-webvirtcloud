@@ -35,7 +35,8 @@ RUN curl -L https://github.com/retspen/webvirtcloud/tarball/master | tar xzC /op
    ;mv -f /etc/nginx/nginx.conf.2 /etc/nginx/nginx.conf \
    ;exit 0
 
-RUN echo "*" >> /root/.ssh/config \
+RUN mkdir -p /root/.ssh \
+   ;echo "*" >> /root/.ssh/config \
    ;echo "  StrictHostKeyChecking no" >> /root/.ssh/config
 
 ADD entrypoint.sh /opt/entrypoint.sh
