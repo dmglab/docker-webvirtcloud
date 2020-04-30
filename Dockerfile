@@ -19,11 +19,6 @@ RUN pip3 install websockify==0.9.0 gunicorn==20.0 rwlock
 
 RUN curl -L https://github.com/retspen/webvirtcloud/tarball/master | tar xzC /opt/ \
    ;mv /opt/retspen-webvirtcloud* /opt/webvirtcloud \
-   ;cp -f /opt/webvirtcloud/conf/supervisor/webvirtcloud.conf /etc/supervisord.d/webvirtcloud.ini \
-   ;sed -i 's/\/srv/\/opt/g' /etc/supervisord.d/webvirtcloud.ini \
-   ;sed -i 's/\/opt\/webvirtcloud\/venv\/bin\/gunicorn/\/usr\/local\/bin\/gunicorn/' /etc/supervisord.d/webvirtcloud.ini \
-   ;sed -i 's/\/opt\/webvirtcloud\/venv\/bin\/python3/\/usr\/bin\/python3/' /etc/supervisord.d/webvirtcloud.ini \
-   ;sed -i 's/user=www-data/user=root/g' -i /etc/supervisord.d/webvirtcloud.ini \
    ;mkdir -p /run/supervisor/ \
    ;cp /opt/webvirtcloud/conf/nginx/webvirtcloud.conf /etc/nginx/conf.d/webvirtcloud.conf \
    ;sed -i 's/\/srv\/webvirtcloud/\/opt\/webvirtcloud/' /etc/nginx/conf.d/webvirtcloud.conf \
