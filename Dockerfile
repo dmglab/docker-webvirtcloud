@@ -4,21 +4,23 @@ WORKDIR /tmp
 RUN dnf clean all \
    ;dnf install -y epel-release \
    ;dnf makecache \
-   ;dnf install -y python3-django \
-                   python3-lxml \
-                   python3-libvirt \
-                   python3-pytz \
+   ;dnf install -y python3-devel \
                    python3-libguestfs \
+                   python3-lxml \
                    cyrus-sasl-md5 \
-                   supervisor \
+                   gcc \
+                   glibc \
+                   libvirt-devel \
+                   iproute-tc \
                    nginx \
+                   supervisor \
+                   git \
                    openssh-clients \
-    ;dnf clean all
-
-RUN pip3 install websockify==0.9.0 gunicorn==20.0 rwlock
+   ;dnf clean all
 
 RUN curl -L https://github.com/retspen/webvirtcloud/tarball/master | tar xzC /opt/ \
    ;mv /opt/retspen-webvirtcloud* /opt/webvirtcloud \
+   ;pip3 install -r /opt/webvirtcloud/conf/requirements.txt \
    ;mkdir -p /run/supervisor/ \
    ;cp /opt/webvirtcloud/conf/nginx/webvirtcloud.conf /etc/nginx/conf.d/webvirtcloud.conf \
    ;sed -i 's/\/srv\/webvirtcloud/\/opt\/webvirtcloud/' /etc/nginx/conf.d/webvirtcloud.conf \
