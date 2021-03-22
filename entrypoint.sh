@@ -4,7 +4,7 @@ cd /opt/webvirtcloud
 if [ ! -f "webvirtcloud/settings.py" ]; then
   cp webvirtcloud/settings.py.template webvirtcloud/settings.py
   SECRET=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 128 | head -n 1)
-  sed -r "s/SECRET_KEY = ''/SECRET_KEY = '${SECRET}'/" -i webvirtcloud/settings.py
+  sed -r "s/SECRET_KEY = .*$/SECRET_KEY = '${SECRET}'/" -i webvirtcloud/settings.py
   python3 manage.py migrate
 
   ssh-keygen -b 4096 -t rsa -f /root/.ssh/id_rsa -q -N ""
