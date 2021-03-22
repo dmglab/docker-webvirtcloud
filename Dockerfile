@@ -37,10 +37,11 @@ RUN mkdir -p /root/.ssh \
    ;echo "  StrictHostKeyChecking no" >> /root/.ssh/config
 
 ADD entrypoint.sh /opt/entrypoint.sh
+RUN chmod +x /opt/entrypoint.sh
 ADD conf/supervisord.ini /etc/supervisord.d/webvirtcloud.ini
 
 WORKDIR /opt
-ENTRYPOINT ["/usr/bin/bash", "/opt/entrypoint.sh"]
+ENTRYPOINT ["/opt/entrypoint.sh"]
 EXPOSE 80
 EXPOSE 6080
 CMD /usr/bin/supervisord -c /etc/supervisord.conf -n
