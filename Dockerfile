@@ -33,7 +33,7 @@ RUN curl -L https://github.com/retspen/webvirtcloud/tarball/master | tar xzC /op
    ;exit 0
 
 RUN mkdir -p /root/.ssh \
-   ;echo "*" >> /root/.ssh/config \
+   ;echo "Host *" >> /root/.ssh/config \
    ;echo "  StrictHostKeyChecking no" >> /root/.ssh/config
 
 ADD entrypoint.sh /opt/entrypoint.sh
