@@ -36,6 +36,8 @@ RUN mkdir -p /root/.ssh \
    ;echo "Host *" >> /root/.ssh/config \
    ;echo "  StrictHostKeyChecking no" >> /root/.ssh/config
 
+VOLUME /opt/webvirtcloud
+
 ADD entrypoint.sh /opt/entrypoint.sh
 RUN chmod +x /opt/entrypoint.sh
 ADD conf/supervisord.ini /etc/supervisord.d/webvirtcloud.ini
