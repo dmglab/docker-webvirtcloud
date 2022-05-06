@@ -1,5 +1,6 @@
 FROM centos:8
 MAINTAINER Daniel Gehrlein <d.gehrlein@outlook.com>
+LABEL version=0.1
 WORKDIR /tmp
 RUN dnf clean all \
    ;dnf install -y epel-release \
